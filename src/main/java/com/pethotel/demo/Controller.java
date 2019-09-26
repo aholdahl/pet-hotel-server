@@ -41,6 +41,13 @@ public class Controller {
         return pets;
     }
 
+    @RequestMapping("/pets/sortDate")
+    public List<Pet> getAllPetsByDate() {
+        String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id ORDER BY checked_in_date;";
+        List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
+        return pets;
+    }
+
     @PostMapping("/pets") // post route to /pets to add a new pet
     public void addPet(@RequestBody Pet newPet) {
         String query = "INSERT INTO pets (owner_id, pet_name, breed, color, is_checked_in, checked_in_date) VALUES (?,?,?,?,?,?);"; // ?'s are used for sanitization
