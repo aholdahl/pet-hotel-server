@@ -2,10 +2,10 @@
 
 CREATE TABLE "owners" (
 	"id" SERIAL PRIMARY KEY,
-	"owner_name" TEXT
+	"owner_name" TEXT NOT NULL
 );
 
-INSERT INTO "owners" ("owner_name") VALUES ('David');
+INSERT INTO "owners" ("owner_name") VALUES ('Aaron'),('Alex'),('Allyson'),('Chris'),('David');
 
 CREATE TABLE "pets" (
 	"id" SERIAL PRIMARY KEY,
@@ -17,4 +17,11 @@ CREATE TABLE "pets" (
 	"checked_in_date" DATE
 );
 
-INSERT INTO "pets" ("owner_id","pet_name") VALUES (1,'Anya'),(1,'Tessa');
+INSERT INTO "pets"
+    ("owner_id", "pet_name", "breed", "color", "is_checked_in", "checked_in_date")
+VALUES
+    (1, 'Geranimo', 'Tibetan Mastiff', 'Orange', true, '09/22/2019'),
+    (2, 'Jeff', 'Rat', 'Brown', true, '09/22/2019'),
+    (4, 'Baba-Yaga', 'Australian Shepherd', 'Cookies and Cream', true, '09/19/2019'),
+    (3, 'LaGrie', 'Russian Blue', 'Grey', true, '09/25/2019'),
+    (5, 'Anya', 'American Shorthair', 'Black', true, '09/24/2019');

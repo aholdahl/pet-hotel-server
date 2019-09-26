@@ -5,6 +5,7 @@ public class Pet {
     private int id;
     private int owner_id;
     private String pet_name;
+    private String owner_name;
     private String breed;
     private String color;
     private boolean is_checked_in;
@@ -21,6 +22,10 @@ public class Pet {
     //name getter
     public String getPetName() {
         return this.pet_name;
+    }
+    //owner name getter
+    public String getOwnerName() {
+        return this.owner_name;
     }
     //breed getter
     public String getBreed() {
@@ -49,6 +54,10 @@ public class Pet {
 
     public void setPetName(String name) {
         this.pet_name = name;
+    }
+
+    public void setOwnerName(String owner_name) {
+        this.owner_name = owner_name;
     }
 
     public void setBreed(String breed) {
