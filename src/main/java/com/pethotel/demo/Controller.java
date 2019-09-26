@@ -52,6 +52,11 @@ public class Controller {
         try {
             jdbcTemplate.update(query, newOwner.getOwnerName());
         } catch (Exception e){
+            System.err.println(e);
+            throw e;
+        }
+    }
+    
     @DeleteMapping("/pets/{id}")
     public void deletePet(@PathVariable int id) {
         String query = "DELETE FROM pets WHERE id = ?;";
