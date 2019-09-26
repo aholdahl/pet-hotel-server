@@ -31,7 +31,7 @@ public class Controller {
 
     @RequestMapping("/pets")
     public List<Pet> getAllPets () {
-        String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id;";
+        String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id ORDER BY pets.id DESC;";
         List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
         return pets;
     }
