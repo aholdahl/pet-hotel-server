@@ -117,4 +117,15 @@ public class Controller {
             throw e;
         }
     }
+
+    @PutMapping("/owners/edit/{id}") // put route for editing pet details
+    // edits for id passed in on path, and receives new pet data in body of request
+    public void editOwner(@PathVariable int id, @RequestBody Owner newOwner) {
+        String query = "UPDATE owners SET owner_name = ? WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, newOwner.getOwnerName(), id);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
