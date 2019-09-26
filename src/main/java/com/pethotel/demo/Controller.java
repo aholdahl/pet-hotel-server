@@ -47,7 +47,7 @@ public class Controller {
     }
 
     @DeleteMapping("/pets/{id}")
-    public void deleteBook(@PathVariable int id) {
+    public void deletePet(@PathVariable int id) {
         String query = "DELETE FROM pets WHERE id = ?;";
         try {
             jdbcTemplate.update(query, id);
@@ -56,5 +56,15 @@ public class Controller {
             throw e;
         }
     }
-
+    
+    @DeleteMapping("/owners/{id}")
+    public void deleteOwner(@PathVariable int id) {
+        String query = "DELETE FROM owners WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, id);
+        } catch (Exception e) {
+            System.err.println(e);
+            throw e;
+        }
+    }
 }
