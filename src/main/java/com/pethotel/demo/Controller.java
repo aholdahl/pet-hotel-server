@@ -23,7 +23,7 @@ public class Controller {
 
     @RequestMapping("/owners")
     public List<Owner> getAllOwners (){
-        String query = "SELECT * FROM owners";
+        String query = "SELECT owners.id, owners.owner_name, count(pets.owner_id) AS pet_count FROM owners LEFT JOIN pets ON pets.owner_id = owners.id GROUP BY owners.id;";
         List<Owner> owners = jdbcTemplate.query(query, new OwnerRowMapper());
         return owners;
     }
@@ -46,6 +46,17 @@ public class Controller {
         }
     }
 
+    @PostMapping("/owners")
+    public void addOwner(@RequestBody Owner newOwner){
+        String query = "INSERT INTO owners (owner_name) VALUES (?)";
+        try {
+            jdbcTemplate.update(query, newOwner.getOwnerName());
+        } catch (Exception e){
+            System.err.println(e);
+            throw e;
+        }
+    }
+    
     @DeleteMapping("/pets/{id}")
     public void deletePet(@PathVariable int id) {
         String query = "DELETE FROM pets WHERE id = ?;";

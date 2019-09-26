@@ -3,6 +3,7 @@ package com.pethotel.demo;
 public class Owner {
     private int id;
     private String owner_name;
+    private int pet_count;
 
     // id getter
     public int getId() {
@@ -12,6 +13,10 @@ public class Owner {
     public String getOwnerName() {
         return this.owner_name;
     }
+    //pet count getter
+    public int getPetCount(){
+        return this.pet_count;
+    }
 
     // setters
     public void setId(int id) {
@@ -20,6 +25,10 @@ public class Owner {
     
     public void setOwnerName(String owner_name) {
         this.owner_name = owner_name;
+    }
+
+    public void setPetCount(int pet_count){
+        this.pet_count = pet_count;
     }
 
     public Owner (){}
