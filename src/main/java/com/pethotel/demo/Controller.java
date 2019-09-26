@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 public class Controller {
@@ -44,4 +46,25 @@ public class Controller {
         }
     }
 
+    @DeleteMapping("/pets/{id}")
+    public void deletePet(@PathVariable int id) {
+        String query = "DELETE FROM pets WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, id);
+        } catch (Exception e) {
+            System.err.println(e);
+            throw e;
+        }
+    }
+    
+    @DeleteMapping("/owners/{id}")
+    public void deleteOwner(@PathVariable int id) {
+        String query = "DELETE FROM owners WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, id);
+        } catch (Exception e) {
+            System.err.println(e);
+            throw e;
+        }
+    }
 }
