@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +28,7 @@ public class Controller {
         List<Owner> owners = jdbcTemplate.query(query, new OwnerRowMapper());
         return owners;
     }
-    
+
     @RequestMapping("/pets")
     public List<Pet> getAllPets () {
         String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id;";
@@ -56,7 +57,7 @@ public class Controller {
             throw e;
         }
     }
-    
+
     @DeleteMapping("/pets/{id}")
     public void deletePet(@PathVariable int id) {
         String query = "DELETE FROM pets WHERE id = ?;";
@@ -67,7 +68,7 @@ public class Controller {
             throw e;
         }
     }
-    
+
     @DeleteMapping("/owners/{id}")
     public void deleteOwner(@PathVariable int id) {
         String query = "DELETE FROM owners WHERE id = ?;";
@@ -75,6 +76,16 @@ public class Controller {
             jdbcTemplate.update(query, id);
         } catch (Exception e) {
             System.err.println(e);
+            throw e;
+        }
+    }
+
+    @PatchMapping("/pets/{id}")
+    public void checkInPet(@PathVariable int id) {
+        String query = "UPDATE pets SET is_checked_in = not is_checked_in, checked_in_date = now() WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, id);
+        } catch (Exception e) {
             throw e;
         }
     }
