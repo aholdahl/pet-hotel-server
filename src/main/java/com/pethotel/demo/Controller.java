@@ -34,7 +34,7 @@ public class Controller {
 
     @RequestMapping("/pets") // get route to /pets
     public List<Pet> getAllPets () {
-        String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id ORDER BY owners.owner_name;";
+        String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.url, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id ORDER BY owners.owner_name;";
         List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
         //PetRowMapper is the same as the ownerRowMapper above, that handles the response
         //from the database, sets it into a list of Pet objects, and returns it
@@ -43,16 +43,16 @@ public class Controller {
 
     @RequestMapping("/pets/sortDate")
     public List<Pet> getAllPetsByDate() {
-        String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id ORDER BY checked_in_date;";
+        String query = "SELECT pets.id, pets.pet_name, pets.breed, pets.color, pets.url, pets.is_checked_in, pets.checked_in_date, pets.owner_id, owners.owner_name FROM pets JOIN owners ON pets.owner_id = owners.id ORDER BY checked_in_date;";
         List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
         return pets;
     }
 
     @PostMapping("/pets") // post route to /pets to add a new pet
     public void addPet(@RequestBody Pet newPet) {
-        String query = "INSERT INTO pets (owner_id, pet_name, breed, color, is_checked_in, checked_in_date) VALUES (?,?,?,?,?,?);"; // ?'s are used for sanitization
+        String query = "INSERT INTO pets (owner_id, pet_name, breed, color, url, is_checked_in, checked_in_date) VALUES (?,?,?,?,?,?,?);"; // ?'s are used for sanitization
         try {
-            jdbcTemplate.update(query, newPet.getOwnerId(), newPet.getPetName(), newPet.getBreed(), newPet.getColor(), newPet.getCheckedInStatus(), newPet.getCheckedInDate());
+            jdbcTemplate.update(query, newPet.getOwnerId(), newPet.getPetName(), newPet.getBreed(), newPet.getColor(), newPet.getUrl(), newPet.getCheckedInStatus(), newPet.getCheckedInDate());
             //jdbcTemplate will pass through each param and pass it into the ?s for sanitized query
         } catch (Exception e) {
             System.err.println(e);
