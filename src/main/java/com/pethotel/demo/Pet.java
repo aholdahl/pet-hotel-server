@@ -2,6 +2,8 @@ package com.pethotel.demo;
 import java.util.Date;
 
 public class Pet {
+    //these are declaring the different properties that an object of type Pet can have
+    //these must have a type declaration
     private int id;
     private int owner_id;
     private String pet_name;
@@ -75,9 +77,10 @@ public class Pet {
     public void setCheckedInDate(Date date) {
         this.checked_in_date = date;
     }
-
+    //creating a Pet object -- if passed nothing, returns a Pet object with no properties
     public Pet() {}
 
+    //if passed the variables in the (), assigns them to properties below
     public Pet(int id, int owner_id, String pet_name, String breed, String color, boolean is_checked_in, Date checked_in_date) {
         this.id = id;
         this.owner_id = owner_id;
