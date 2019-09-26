@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -97,5 +98,10 @@ public class Controller {
         } catch (Exception e) {
             throw e;
         }
+    };
+
+    @PutMapping("/pets/edit/{id}")
+    public void editPet(@PathVariable int id, @RequestBody Pet newPet) {
+        System.out.println(newPet);
     }
 }
