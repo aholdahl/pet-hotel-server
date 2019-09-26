@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 public class Controller {
@@ -38,6 +40,17 @@ public class Controller {
         String query = "INSERT INTO pets (owner_id, pet_name, breed, color, is_checked_in, checked_in_date) VALUES (?,?,?,?,?,?);";
         try {
             jdbcTemplate.update(query, newPet.getOwnerId(), newPet.getPetName(), newPet.getBreed(), newPet.getColor(), newPet.getCheckedInStatus(), newPet.getCheckedInDate());
+        } catch (Exception e) {
+            System.err.println(e);
+            throw e;
+        }
+    }
+
+    @DeleteMapping("/pets/{id}")
+    public void deleteBook(@PathVariable int id) {
+        String query = "DELETE FROM pets WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, id);
         } catch (Exception e) {
             System.err.println(e);
             throw e;
