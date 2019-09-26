@@ -89,7 +89,7 @@ public class Controller {
         }
     }
 
-    @PatchMapping("/pets/{id}") //patch route for pet checking in
+    @PatchMapping("/pets/check/{id}") //patch route for pet checking in/out
     public void checkInPet(@PathVariable int id) {
         String query = "UPDATE pets SET is_checked_in = not is_checked_in, checked_in_date = now() WHERE id = ?;";
         //query text toggles checkin status and sets new checkin date to now()
@@ -100,8 +100,14 @@ public class Controller {
         }
     };
 
-    @PutMapping("/pets/edit/{id}")
+    @PutMapping("/pets/edit/{id}") //put route for editing pet details
+    //edits for id passed in on path, and receives new pet data in body of request
     public void editPet(@PathVariable int id, @RequestBody Pet newPet) {
-        System.out.println(newPet);
+        String query = "Update pets SET owner_id = ?, pet_name = ?, breed = ?, color = ? WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, newPet.getOwnerId(), newPet.getPetName(), newPet.getBreed(), newPet.getColor(), id);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
