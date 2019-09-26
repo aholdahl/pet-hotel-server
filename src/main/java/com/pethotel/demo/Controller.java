@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -88,12 +89,23 @@ public class Controller {
         }
     }
 
-    @PatchMapping("/pets/{id}") //patch route for pet checking in
+    @PatchMapping("/pets/check/{id}") //patch route for pet checking in/out
     public void checkInPet(@PathVariable int id) {
         String query = "UPDATE pets SET is_checked_in = not is_checked_in, checked_in_date = now() WHERE id = ?;";
         //query text toggles checkin status and sets new checkin date to now()
         try {
             jdbcTemplate.update(query, id);
+        } catch (Exception e) {
+            throw e;
+        }
+    };
+
+    @PutMapping("/pets/edit/{id}") //put route for editing pet details
+    //edits for id passed in on path, and receives new pet data in body of request
+    public void editPet(@PathVariable int id, @RequestBody Pet newPet) {
+        String query = "Update pets SET owner_id = ?, pet_name = ?, breed = ?, color = ? WHERE id = ?;";
+        try {
+            jdbcTemplate.update(query, newPet.getOwnerId(), newPet.getPetName(), newPet.getBreed(), newPet.getColor(), id);
         } catch (Exception e) {
             throw e;
         }
