@@ -48,12 +48,12 @@ public class Pet {
         this.id = id;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.owner_id = ownerId;
+    public void setOwnerId(int owner_id) {
+        this.owner_id = owner_id;
     }
 
-    public void setPetName(String name) {
-        this.pet_name = name;
+    public void setPetName(String pet_name) {
+        this.pet_name = pet_name;
     }
 
     public void setOwnerName(String owner_name) {
