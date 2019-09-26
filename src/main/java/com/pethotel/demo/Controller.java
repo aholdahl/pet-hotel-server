@@ -21,7 +21,7 @@ public class Controller {
 
     @RequestMapping("/owners")
     public List<Owner> getAllOwners (){
-        String query = "SELECT owners.id, owners.owner_name, count(pets.owner_id) FROM owners JOIN pets ON pets.owner_id = owners.id GROUP BY owners.id;";
+        String query = "SELECT owners.id, owners.owner_name, count(pets.owner_id) AS pet_count FROM owners JOIN pets ON pets.owner_id = owners.id GROUP BY owners.id;";
         List<Owner> owners = jdbcTemplate.query(query, new OwnerRowMapper());
         return owners;
     }
