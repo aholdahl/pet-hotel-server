@@ -10,6 +10,7 @@ public class Pet {
     private String owner_name;
     private String breed;
     private String color;
+    private String url;
     private boolean is_checked_in;
     private Date checked_in_date;
 
@@ -36,6 +37,10 @@ public class Pet {
     //color getter
     public String getColor() {
         return this.color;
+    }
+    //url getter
+    public String getUrl() {
+        return this.url;
     }
     //checked in status getter
     public boolean getCheckedInStatus() {
@@ -70,6 +75,10 @@ public class Pet {
         this.color = color;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public void setCheckedInStatus(boolean status) {
         this.is_checked_in = status;
     }
@@ -81,12 +90,13 @@ public class Pet {
     public Pet() {}
 
     //if passed the variables in the (), assigns them to properties below
-    public Pet(int id, int owner_id, String pet_name, String breed, String color, boolean is_checked_in, Date checked_in_date) {
+    public Pet(int id, int owner_id, String pet_name, String breed, String color, String url, boolean is_checked_in, Date checked_in_date) {
         this.id = id;
         this.owner_id = owner_id;
         this.pet_name = pet_name;
         this.breed = breed;
         this.color = color;
+        this.url = url;
         this.is_checked_in = is_checked_in;
         this.checked_in_date = checked_in_date;
     }
