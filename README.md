@@ -59,6 +59,7 @@ In the main project folder, create a file called application.properties. (This i
 -Copy+paste the contents from this project
     -Update the spring.datasource.url to reflect the database name in Postico
     -Update the spring.datasource.username to reflect your Postico user ID
+        Note: It is recommended that if working on a group project, add application.properties to the .gitignore, and each user should create a copy with their personal username.
 
 ## Hello World
 Create a file called Controller.java (Controller is the sample name and is the equivalent of server.js in Javascript.) Demo in the first line is the file path in which the files are located:
