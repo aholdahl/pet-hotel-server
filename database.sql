@@ -25,3 +25,5 @@ VALUES
     (4, 'Baba-Yaga', 'Australian Shepherd', 'Cookies and Cream', true, '09/19/2019'),
     (3, 'LaGrie', 'Russian Blue', 'Grey', true, '09/25/2019'),
     (5, 'Anya', 'American Shorthair', 'Black', true, '09/24/2019');
+
+    ALTER TABLE "public"."pets" ADD COLUMN "url" VARCHAR(300);
