@@ -28,7 +28,7 @@ If you have not done so already, you will need to install Java:
             -java Controller
                 -This runs it once it is compiled.
 
--Clone the client-side repository.
+-Clone the client-side repository: https://github.com/aholdahl/pet-hotel-client
 -npm install
 -npm start
 
@@ -79,3 +79,10 @@ React setup and startup is the same.
 
 In the package.json file, ensure the following is reflected:
     "proxy": "http://localhost:8080",
+
+## Technologies Used
+
+Java
+Spring Boot
+Gradle
+JDBC
