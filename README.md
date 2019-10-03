@@ -86,3 +86,4 @@ Java
 Spring Boot
 Gradle
 JDBC
+PostgreSQL
